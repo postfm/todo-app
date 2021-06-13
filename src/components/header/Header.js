@@ -1,10 +1,10 @@
 import "./Header.scss";
 
-const Header = () => {
+const Header = ({ toDo, done = 0 }) => {
   return (
     <div className="header d-flex">
       <h1 className="header">Todo List</h1>
-      <h2>3 more to do, 1 done</h2>
+      <h2>{`${toDo} more to do, ${done} done`}</h2>
     </div>
   );
 };
