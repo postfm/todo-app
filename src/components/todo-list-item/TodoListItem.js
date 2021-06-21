@@ -3,14 +3,10 @@ import { faExclamation, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 
 import "./TodoListItem.scss";
 
-function TodoListItem({
-  label,
-  onDeleted,
-  onToggleImportant,
-  onToggleDone,
-  done,
-  important,
-}) {
+const TodoListItem = (props) => {
+  const { label, onDeleted, onToggleImportant, onToggleDone, done, important } =
+    props;
+
   let classNames = "todo-list-item";
 
   if (done) {
@@ -44,6 +40,6 @@ function TodoListItem({
       </button>
     </span>
   );
-}
+};
 
 export default TodoListItem;
