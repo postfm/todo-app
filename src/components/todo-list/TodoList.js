@@ -2,7 +2,7 @@ import TodoListItem from "../todo-list-item";
 import _ from "lodash";
 import "./TodoList.scss";
 
-const TodoList = ({ todos, onDeleted, onToggleImportant, onToggleDone }) => {
+function TodoList({ todos, onDeleted, onToggleImportant, onToggleDone }) {
   const list = _.map(todos, (item) => {
     const { id, ...itemProps } = item;
     return (
@@ -18,6 +18,6 @@ const TodoList = ({ todos, onDeleted, onToggleImportant, onToggleDone }) => {
   });
 
   return <ul className="list-group todo-list">{list}</ul>;
-};
+}
 
 export default TodoList;

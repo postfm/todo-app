@@ -1,32 +1,27 @@
-import React from "react";
 import "./ItemStatusFilter.scss";
 
-class ItemStatusFilter extends React.Component {
-  buttons = [
+function ItemStatusFilter({ filter, onFilterChange }) {
+  const button = [
     { name: "all", label: "All" },
     { name: "active", label: "Active" },
     { name: "done", label: "Done" },
   ];
-  onFilterChange;
-  render() {
-    const { filter, onFilterChange } = this.props;
 
-    const buttons = this.buttons.map(({ name, label }) => {
-      const isActive = filter === name;
-      const clazz = isActive ? "btn-info" : "btn-outline-secondary";
-      return (
-        <button
-          type="button"
-          className={`btn ${clazz}`}
-          key={name}
-          onClick={() => onFilterChange(name)}
-        >
-          {label}
-        </button>
-      );
-    });
-    return <div className="btn-group">{buttons}</div>;
-  }
+  const buttons = button.map(({ name, label }) => {
+    const isActive = filter === name;
+    const clazz = isActive ? "btn-info" : "btn-outline-secondary";
+    return (
+      <button
+        type="button"
+        className={`btn ${clazz}`}
+        key={name}
+        onClick={() => onFilterChange(name)}
+      >
+        {label}
+      </button>
+    );
+  });
+  return <div className="btn-group">{buttons}</div>;
 }
 
 export default ItemStatusFilter;
