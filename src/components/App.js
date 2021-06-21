@@ -37,7 +37,8 @@ function App() {
 
   function addItem(text) {
     const newItem = createTodoItem(text);
-    setTodoData(({ todoData }) => {
+
+    setTodoData((todoData) => {
       const newArray = [...todoData, newItem];
       return newArray;
     });
@@ -51,13 +52,13 @@ function App() {
   }
 
   function onToggleImportant(id) {
-    setTodoData(() => {
-      return toggleProperty(id, "important");
+    setTodoData((todoData) => {
+      return toggleProperty(todoData, id, "important");
     });
   }
 
   function onToggleDone(id) {
-    setTodoData(() => {
+    setTodoData((todoData) => {
       return toggleProperty(todoData, id, "done");
     });
   }
@@ -66,7 +67,6 @@ function App() {
     if (term.length === 0) {
       return items;
     }
-
     return items.filter((item) => {
       return item.label.toLowerCase().indexOf(term.toLowerCase()) > -1;
     });
