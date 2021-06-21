@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./addItemForm.scss";
 
 function AddItemForm({ onItemAdded }) {
+
   const [label, setLabel] = useState("");
   function onLabelChange(e) {
     setLabel(e.target.value);
@@ -11,6 +12,7 @@ function AddItemForm({ onItemAdded }) {
     onItemAdded(label);
     setLabel("");
   }
+
   return (
     <form className="add-item-form d-flex" onSubmit={onSubmit}>
       <input

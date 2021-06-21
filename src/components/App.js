@@ -8,6 +8,7 @@ import AddItemForm from "./add-item-form";
 
 function App() {
   let maxId = 100;
+
   const [todoData, setTodoData] = useState([
     createTodoItem("Drink Coffee"),
     createTodoItem("Build Awesome Application"),
@@ -19,6 +20,7 @@ function App() {
 
   function deleteItem(id) {
     setTodoData(({ todoData }) => {
+
       const idx = todoData.findIndex((el) => el.id === id);
       const newArray = [...todoData.slice(0, idx), ...todoData.slice(idx + 1)];
       return newArray;
@@ -36,28 +38,36 @@ function App() {
 
   function addItem(text) {
     const newItem = createTodoItem(text);
+
     setTodoData((todoData) => {
+
       const newArray = [...todoData, newItem];
       return newArray;
     });
   }
 
+
   function toggleProperty(arr, id, propName) {
     const idx = arr.findIndex((el) => el.id === id);
     const oldItem = arr[idx];
+
     const newItem = { ...oldItem, [propName]: !oldItem[propName] };
-    return [...arr.slice(0, idx), newItem, ...arr.slice(idx + 1)];
+    return [...todoData.slice(0, idx), newItem, ...todoData.slice(idx + 1)];
   }
 
   function onToggleImportant(id) {
+
     setTodoData((todoData) => {
       return toggleProperty(todoData, id, "important");
+
     });
   }
 
   function onToggleDone(id) {
+
     setTodoData((todoData) => {
       return toggleProperty(todoData, id, "done");
+
     });
   }
 
@@ -71,7 +81,9 @@ function App() {
   }
 
   function onSearchChange(term) {
+
     setTerm(term);
+
   }
 
   function getFilter(items, filter) {
@@ -87,8 +99,10 @@ function App() {
     }
   }
   function onFilterChange(filter) {
+
     setFilter(filter);
   }
+
   const visibleItems = getFilter(search(todoData, term), filter);
   const doneCount = todoData.filter((el) => el.done).length;
   const todoCount = todoData.length - doneCount;
