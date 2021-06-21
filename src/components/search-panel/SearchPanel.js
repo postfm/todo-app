@@ -5,6 +5,7 @@ function SearchPanel({ onSearchChange }) {
     onSearchChange(e.target.value);
   }
 
+
   return (
     <input
       type="text"

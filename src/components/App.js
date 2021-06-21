@@ -18,8 +18,9 @@ function App() {
   const [term, setTerm] = useState("");
   const [filter, setFilter] = useState("all");
 
-  function deleteItem(id) {
-    setTodoData(({ todoData }) => {
+  const deleteItem = (id) => {
+    setTodoData((todoData) => {
+
       const idx = todoData.findIndex((el) => el.id === id);
       const newArray = [...todoData.slice(0, idx), ...todoData.slice(idx + 1)];
       return newArray;
@@ -35,11 +36,13 @@ function App() {
     };
   }
 
-  function addItem(text) {
-    const newItem = createTodoItem(text);
 
-    setTodoData((todoData) => {
+  const addItem = (text) => {
+    const newItem = createTodoItem(text);
+    setTodoData(() => {
       const newArray = [...todoData, newItem];
+      console.log(newArray);
+
       return newArray;
     });
   }
@@ -51,19 +54,25 @@ function App() {
     return [...arr.slice(0, idx), newItem, ...arr.slice(idx + 1)];
   }
 
-  function onToggleImportant(id) {
+
+  const onToggleImportant = (id) => {
+
     setTodoData((todoData) => {
       return toggleProperty(todoData, id, "important");
     });
   }
 
-  function onToggleDone(id) {
+
+  const onToggleDone = (id) => {
+
     setTodoData((todoData) => {
       return toggleProperty(todoData, id, "done");
     });
   }
 
-  function search(items, term) {
+
+  const search = (items, term) => {
+
     if (term.length === 0) {
       return items;
     }
@@ -72,9 +81,11 @@ function App() {
     });
   }
 
-  function onSearchChange(term) {
+
+  const onSearchChange = (term) => {
     setTerm(term);
-  }
+  };
+
 
   function getFilter(items, filter) {
     switch (filter) {
@@ -89,9 +100,9 @@ function App() {
     }
   }
 
-  function onFilterChange(filter) {
+  const onFilterChange = (filter) => {
     setFilter(filter);
-  }
+  };
 
   const visibleItems = getFilter(search(todoData, term), filter);
   const doneCount = todoData.filter((el) => el.done).length;
