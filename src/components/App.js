@@ -8,6 +8,7 @@ import AddItemForm from "./add-item-form";
 
 function App() {
   let maxId = 100;
+
   const [todoData, setTodoData] = useState([
     createTodoItem("Drink Coffee"),
     createTodoItem("Build Awesome Application"),
@@ -19,11 +20,12 @@ function App() {
 
   const deleteItem = (id) => {
     setTodoData((todoData) => {
+
       const idx = todoData.findIndex((el) => el.id === id);
       const newArray = [...todoData.slice(0, idx), ...todoData.slice(idx + 1)];
       return newArray;
     });
-  };
+  }
 
   function createTodoItem(label) {
     return {
@@ -34,14 +36,16 @@ function App() {
     };
   }
 
+
   const addItem = (text) => {
     const newItem = createTodoItem(text);
     setTodoData(() => {
       const newArray = [...todoData, newItem];
       console.log(newArray);
+
       return newArray;
     });
-  };
+  }
 
   function toggleProperty(arr, id, propName) {
     const idx = arr.findIndex((el) => el.id === id);
@@ -50,30 +54,38 @@ function App() {
     return [...arr.slice(0, idx), newItem, ...arr.slice(idx + 1)];
   }
 
+
   const onToggleImportant = (id) => {
+
     setTodoData((todoData) => {
       return toggleProperty(todoData, id, "important");
     });
-  };
+  }
+
 
   const onToggleDone = (id) => {
+
     setTodoData((todoData) => {
       return toggleProperty(todoData, id, "done");
     });
-  };
+  }
+
 
   const search = (items, term) => {
+
     if (term.length === 0) {
       return items;
     }
     return items.filter((item) => {
       return item.label.toLowerCase().indexOf(term.toLowerCase()) > -1;
     });
-  };
+  }
+
 
   const onSearchChange = (term) => {
     setTerm(term);
   };
+
 
   function getFilter(items, filter) {
     switch (filter) {
@@ -87,9 +99,11 @@ function App() {
         return items;
     }
   }
+
   const onFilterChange = (filter) => {
     setFilter(filter);
   };
+
   const visibleItems = getFilter(search(todoData, term), filter);
   const doneCount = todoData.filter((el) => el.done).length;
   const todoCount = todoData.length - doneCount;
