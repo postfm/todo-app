@@ -19,12 +19,11 @@ function App() {
   const [filter, setFilter] = useState("all");
 
   function deleteItem(id) {
-    setTodoData(() => {
+    setTodoData(({ todoData }) => {
+
       const idx = todoData.findIndex((el) => el.id === id);
       const newArray = [...todoData.slice(0, idx), ...todoData.slice(idx + 1)];
-      return {
-        todoData: newArray,
-      };
+      return newArray;
     });
   }
 
@@ -39,34 +38,36 @@ function App() {
 
   function addItem(text) {
     const newItem = createTodoItem(text);
-    setTodoData(({ todoData }) => {
+
+    setTodoData((todoData) => {
+
       const newArray = [...todoData, newItem];
-      return {
-        todoData: newArray,
-      };
+      return newArray;
     });
   }
 
-  function toggleProperty(id, propName) {
-    const idx = todoData.findIndex((el) => el.id === id);
-    const oldItem = todoData[idx];
+
+  function toggleProperty(arr, id, propName) {
+    const idx = arr.findIndex((el) => el.id === id);
+    const oldItem = arr[idx];
+
     const newItem = { ...oldItem, [propName]: !oldItem[propName] };
     return [...todoData.slice(0, idx), newItem, ...todoData.slice(idx + 1)];
   }
 
   function onToggleImportant(id) {
-    setTodoData(({ todoData }) => {
-      return {
-        todoData: toggleProperty(id, "important"),
-      };
+
+    setTodoData((todoData) => {
+      return toggleProperty(todoData, id, "important");
+
     });
   }
 
   function onToggleDone(id) {
-    setTodoData(({ todoData }) => {
-      return {
-        todoData: toggleProperty(todoData, id, "done"),
-      };
+
+    setTodoData((todoData) => {
+      return toggleProperty(todoData, id, "done");
+
     });
   }
 
@@ -74,14 +75,15 @@ function App() {
     if (term.length === 0) {
       return items;
     }
-
     return items.filter((item) => {
       return item.label.toLowerCase().indexOf(term.toLowerCase()) > -1;
     });
   }
 
   function onSearchChange(term) {
-    setTerm({ term });
+
+    setTerm(term);
+
   }
 
   function getFilter(items, filter) {
@@ -97,7 +99,8 @@ function App() {
     }
   }
   function onFilterChange(filter) {
-    setFilter({ filter });
+
+    setFilter(filter);
   }
 
   const visibleItems = getFilter(search(todoData, term), filter);

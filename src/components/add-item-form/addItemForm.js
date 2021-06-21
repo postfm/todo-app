@@ -2,15 +2,17 @@ import { useState } from "react";
 import "./addItemForm.scss";
 
 function AddItemForm({ onItemAdded }) {
-  const [label, setState] = useState("");
-  const onLabelChange = (e) => {
-    setState(e.target.value);
-  };
-  const onSubmit = (e) => {
+
+  const [label, setLabel] = useState("");
+  function onLabelChange(e) {
+    setLabel(e.target.value);
+  }
+  function onSubmit(e) {
     e.preventDefault();
     onItemAdded(label);
-    setState("");
-  };
+    setLabel("");
+  }
+
   return (
     <form className="add-item-form d-flex" onSubmit={onSubmit}>
       <input
